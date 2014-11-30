@@ -71,7 +71,7 @@
         var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
-        var data = "name=" + name + "&username=" + username + "&email=" + email + "&password=" + password;
+        var data = "name=" + name + "&username=" + username + "&email=" + email + "&password=" + password + "&isfacebookuser=false";
 
         $.post("/SolrFlare/CreateUserInDB", data, function(result) {
               if (result.trim() == "success") {

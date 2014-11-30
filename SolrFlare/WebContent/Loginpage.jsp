@@ -159,7 +159,7 @@
 		
         function createFacebookUserInDb(username, name, email) {
             var password = "nopassword";
-            var data = "name=" + name + "&username=" + username + "&email=" + email + "&password=" + password;
+            var data = "name=" + name + "&username=" + username + "&email=" + email + "&password=" + password + "&isfacebookuser=true";
 
             $.post("/SolrFlare/CreateUserInDB", data, function(result) {
                   if (result.trim() == "success") {
@@ -208,25 +208,20 @@
 		var userInfo2 = "nodata";
 		var img = "";
 		function storeUserInterests() {
-			alert('hi');
 			FB.api('/me', function(response) {
 				var info = JSON.stringify(response);
 				document.getElementById('userInfo1').value = info;
 				userInfo1 = info;
-				alert(info);
 				putInfoInDatabase();
 			});
 			FB.api('/me/likes', function(response) {
 				var info = JSON.stringify(response);
 				document.getElementById('userInfo2').value = info;
 				userInfo2 = escape(info);
-				alert(info);
 			});
 			FB.api('/me?fields=picture', function(response) {
 				var info = JSON.stringify(response);
-				console.log("Img: " + info);
 				img = info;
-				alert(info);
 			});
 		}
 

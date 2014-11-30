@@ -45,6 +45,12 @@
 
 #navbar li a {
     color: #575757;
+    
+    -webkit-transition: 500ms linear 0s;
+    -moz-transition: 500ms linear 0s;
+    -o-transition: 500ms linear 0s;
+    transition: 500ms linear 0s;
+    outline: 0 none;
 	
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -71,7 +77,10 @@
 }
 
 #navbar li.active a {
-    color: white;
+
+	/* Glow white */
+    color: #fff;
+    text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
     
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;

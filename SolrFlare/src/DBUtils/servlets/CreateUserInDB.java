@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import util.ServletUtils;
+
 @WebServlet(name = "CreateUserInDB", urlPatterns = { "/CreateUserInDB" })
 public class CreateUserInDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,8 +30,14 @@ public class CreateUserInDB extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String isFacebookUser = request.getParameter("isfacebookuser");
 		String errorMsg = null;
 		PrintWriter out = response.getWriter();
+
+		/* Timestamp */
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		Date dateobj = new Date();
+		String datetime = df.format(dateobj);
 		
 		if (email == null || email.equals("")) {
 			errorMsg = "Email ID can't be null or empty.";
@@ -44,12 +52,6 @@ public class CreateUserInDB extends HttpServlet {
 		if (errorMsg != null) {
 			out.println(errorMsg);
 		} else {
-			
-			/* Timestamp */
-			DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-			Date dateobj = new Date();
-			String datetime = df.format(dateobj);
-			
 			Connection con = (Connection) getServletContext().getAttribute("DBConnection");
 			PreparedStatement ps = null;
 			try {
@@ -84,7 +86,9 @@ public class CreateUserInDB extends HttpServlet {
 				}
 			}
 		}
-
+		
+		boolean isFBUser = isFacebookUser.equals("true") ? true : false;
+		User userdata = new User(username, name, email, password, datetime, "Y", isFBUser, null, null, null);
+		ServletUtils.addUserToSession(username, userdata, request);
 	}
-
 }

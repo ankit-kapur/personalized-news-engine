@@ -12,6 +12,22 @@ public class User {
 	private String password;
 	private String lastLogin;
 	private String active;
+	private boolean isFacebookUser;
+	
+	public User(String userId, String userName, String email, String password, String lastLogin, String active, boolean isFacebookUser, Map<String, String> userCatMap, List<String> categoryList, Map<String, String> prefCatMap) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+		this.lastLogin = lastLogin;
+		this.active = active;
+		this.isFacebookUser = isFacebookUser;
+		this.userCatMap = userCatMap;
+		this.categoryList = categoryList;
+		this.prefCatMap = prefCatMap;
+	}
+	
 	private Map<String,String> userCatMap;
 	private List<String> categoryList;
 	private Map<String,String> prefCatMap;
@@ -99,5 +115,11 @@ public class User {
 		{
 			System.out.println("\npreference-->"+pref+" "+"\nCatgories---->"+prefCatMap.get(pref));
 		}
+	}
+	public boolean isFacebookUser() {
+		return isFacebookUser;
+	}
+	public void setFacebookUser(boolean isFacebookUser) {
+		this.isFacebookUser = isFacebookUser;
 	}
 }
