@@ -31,14 +31,20 @@ public class User {
 	private Map<String,String> userCatMap;
 	private List<String> categoryList;
 	private Map<String,String> prefCatMap;
+	private Map<String,Integer> userDocWeightMap;
+	private List<String> prefernceList;
+	
 	public User()
 	{
-		//This is not populated now but i thought it might be useful
 		userCatMap= new HashMap<String, String>();
 		//For storing preference as a key and category as a value for a particular user.
 		prefCatMap= new HashMap<String, String>();
 		//For storing the category list for a particular user.
 		categoryList=new ArrayList<String>();
+		//For storing the preference list for a particular user.
+		prefernceList=new ArrayList<String>();
+		//For storing the ArticlId and weight associated for a particular user.
+		userDocWeightMap= new HashMap<String, Integer>();
 	}
 	public User(String userId){
 		this.userId=userId;
@@ -121,5 +127,17 @@ public class User {
 	}
 	public void setFacebookUser(boolean isFacebookUser) {
 		this.isFacebookUser = isFacebookUser;
+	}
+	public List<String> getPrefernceList() {
+		return prefernceList;
+	}
+	public void setPrefernceList(List<String> prefernceList) {
+		this.prefernceList = prefernceList;
+	}
+	public Map<String, Integer> getUserDocWeightMap() {
+		return userDocWeightMap;
+	}
+	public void setUserDocWeightMap(Map<String, Integer> userDocWeightMap) {
+		this.userDocWeightMap = userDocWeightMap;
 	}
 }

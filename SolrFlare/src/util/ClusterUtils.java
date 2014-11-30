@@ -1,8 +1,13 @@
 package util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +27,7 @@ public class ClusterUtils {
 	static int seedsForClustering = 5;
 	static DistanceFunction distanceFunction = new ManhattanDistance();
 	
-	static String arffFileName = "clusterdata/user_data.arff";
+	static File arffFile = null;
 	static Map<Integer, Integer> clusteredData = new HashMap<Integer, Integer>();
 	static Instances userData;
 
@@ -32,7 +37,7 @@ public class ClusterUtils {
 		Instances dataWithoutLastAttribute = null;
 
 		try {
-			reader = new BufferedReader(new FileReader(arffFileName));
+			reader = new BufferedReader(new FileReader(arffFile));
 			userData = new Instances(reader);
 			System.out.println("Loaded arff file.");
 
@@ -43,9 +48,7 @@ public class ClusterUtils {
 			Remove remove = new Remove(); // new instance of filter
 			remove.setOptions(removeOptions); // set options
 			remove.setInputFormat(userData); // inform filter about dataset
-			dataWithoutLastAttribute = Filter.useFilter(userData, remove); // apply
-																// filter
-
+			dataWithoutLastAttribute = Filter.useFilter(userData, remove); // apply filter
 			/* Use k-means */
 			SimpleKMeans clusterer = new SimpleKMeans();
 
@@ -63,6 +66,7 @@ public class ClusterUtils {
 				int clusterNum = assignments[instanceNum];
 				clusteredData.put(instanceNum, clusterNum);
 			}
+			System.out.println("Clustering complete.");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -102,5 +106,54 @@ public class ClusterUtils {
 		}
 
 		return userIds;
+	}
+
+	public static void createArffFile(Connection con, File file) {
+		try {
+			arffFile = file;
+			Map<String, List<Integer>> wekaDataMap = null;
+			if (file.exists())
+				file.delete();
+			file.createNewFile();
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			String staticText = "@relation user_categories\n@attribute Science_and_Technology numeric\n@attribute Lifestyle numeric\n@attribute Entertainment numeric\n@attribute Travel numeric\n@attribute Business numeric\n@attribute Automobiles numeric\n@attribute World_news numeric\n@attribute Miscellaneous numeric\n@attribute userid string\n\n% Each data row corresponds to a single user\n@data";
+			output.write(staticText);
+			output.write("\n");
+			DBUtils dbUtils = null;
+			try {
+				dbUtils = new DBUtils(con);
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				try {
+
+					wekaDataMap = dbUtils.PopulateUserDataForWekaFile();
+					for (String id : wekaDataMap.keySet()) {
+						String outputString = "";
+						List<Integer> list = wekaDataMap.get(id);
+						for (int i = 0; i < list.size(); i++) {
+							if (i == 0)
+								outputString = outputString + String.valueOf(list.get(i));
+							else
+								outputString = outputString + "," + String.valueOf(list.get(i));
+						}
+						outputString = outputString + "," + id;
+						output.write(outputString);
+						output.write("\n");
+					}
+					System.out.println("ARFF file created: " + file.getAbsolutePath());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (DBUtilException e) {
+				e.printStackTrace();
+			}
+			output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 }

@@ -192,10 +192,36 @@
             $.post("/SolrFlare/AuthenticateUser", data, function(result) {
                 if (result.trim() == "success") {
                 	document.getElementById("message").innerHTML = "Welcome " + username + ". You are connected.";
+                	
+                	/* Get user preferences */
+                	getUserPreferences(username);
+                	
+                	/* Call clusterer */
+                	callClusterer();
+                	
                 	window.location = "/SolrFlare/Home.jsp";
                 } else {
                 	document.getElementById("message").innerHTML = result;
                 }
+            });
+        }
+		
+        function getUserPreferences(username) {
+            var data = "username=" + username;
+
+            $.post("/SolrFlare/GetUserPreferencesServlet", data, function(result) {
+                console.log("Got user preferences into session.");
+            });
+        }
+        
+        function callClusterer(username) {
+            var data = "";
+            
+            $.post("/SolrFlare/ClustererServlet", data, function(result) {
+            	if (result.trim() == "success")
+            	    console.log("Clustering done.");
+            	else 
+            		console.log("Clustering failed.");
             });
         }
 

@@ -30,6 +30,11 @@ public class AppContextListener implements ServletContextListener {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		/* Set arff file path */
+		String filepath = System.getProperty("user.home") + ctx.getInitParameter("ClusterFilePath");
+		ctx.setAttribute("clusterFilePath", filepath);
+		
 		// initialize log4j
 		String log4jConfig = ctx.getInitParameter("log4j-config");
 		if (log4jConfig == null) {
