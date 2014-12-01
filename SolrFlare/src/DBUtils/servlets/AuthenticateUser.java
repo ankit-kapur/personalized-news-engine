@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -49,13 +50,16 @@ public class AuthenticateUser extends HttpServlet {
 		
 		ServletContext context = request.getSession().getServletContext();
 		this.connection = (Connection) context.getAttribute("DBConnection");
+		HttpSession session = request.getSession();
 		
 		try {
 			DBUtils dbUtils = new DBUtils(connection);
 			boolean exists = dbUtils.isUserExists(username);
 			
 			if (exists) {
+				session.setAttribute("name", username);
 				if (dbUtils.authenticateUser(username, password)) {
+					session.setAttribute("isLoggedIn", true);
 					responseMessage = "success";
 				} else {
 					responseMessage = "Invalid password for user '" + username + "'";

@@ -1,11 +1,13 @@
 package DBUtils.servlets;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class User {
+public class User implements Serializable {
 
+	private static final long serialVersionUID = -2577394084544341212L;
 	private String userId;
 	private String userName;
 	private String email;

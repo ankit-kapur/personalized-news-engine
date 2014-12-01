@@ -9,21 +9,86 @@
 
 <link rel="stylesheet" href="css/homeboxes.css" type="text/css" />
 
-<script src="js/jquery-1.11.1.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css">
+
+<script src="nytimes/js/searchresults.js"></script>
+<script src="nytimes/widgets/core/Core.js"></script>
+<script src="nytimes/widgets/core/AbstractManager.js"></script>
+<script src="nytimes/widgets/managers/Manager.jquery.js"></script>
+<script src="nytimes/widgets/core/Parameter.js"></script>
+<script src="nytimes/widgets/core/ParameterStore.js"></script>
+<script src="nytimes/widgets/core/AbstractWidget.js"></script>
+<script src="nytimes/widgets/ResultWidget.js"></script>
+<script src="nytimes/widgets/jquery/PagerWidget.js"></script>
+<script src="nytimes/widgets/core/AbstractFacetWidget.js"></script>
+<script src="nytimes/widgets/TagcloudWidget.js"></script>
+<script src="nytimes/widgets/CurrentSearchWidget.9.js"></script>
+<script src="nytimes/widgets/core/AbstractTextWidget.js"></script>
+<script src="nytimes/widgets/AutocompleteWidget.js"></script>
+<script src="nytimes/widgets/CountryCodeWidget.js"></script>
+<script src="nytimes/widgets/CalendarWidget.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-            var data = "science";
-            $.post("/SolrFlare/GetHomeArticles", data, function(result) {
-                $("#science_article").html(result);
-            });
-            
-            var data = "lifestyle";
-            $.post("/SolrFlare/GetHomeArticles", data, function(result) {
-                $("#lifestyle_article").html(result);
-            });
-    });
-    </script>
+	$(document).ready(function() {
+
+		var loggedIn =
+<%=session.getAttribute("isLoggedIn")%>
+	;
+		if (loggedIn == null) {
+			window.location = "/SolrFlare/Loginpage.jsp";
+		}
+
+		var data = "category='Science and Technology'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+			 $("#science_article").html(result);
+		});
+
+		data = "category='Lifestyle'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#lifestyle_article").html(result);
+		});
+
+		data = "category='Entertainment'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#entertainment_article").html(result);
+		});
+
+		data = "category='Travel'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#travel_article").html(result);
+		});
+
+		data = "category='Business'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#business_article").html(result);
+		});
+		var data = "category='Automobiles'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#automobiles_article").html(result);
+		});
+		var data = "category='World'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#world_article").html(result);
+		});
+		var data = "category='Miscellaneous'";
+		$.post("/SolrFlare/GetHomeArticles", data, function(result) {
+			if (result.trim() != "")
+				$("#misc_article").html(result);
+		});
+	});
+</script>
 </head>
 
 <body>
@@ -32,7 +97,7 @@
 	<div id="fb-root"></div>
 
 	<!-- UI Elements here -->
-	<jsp:include page="Headerbar.html" />
+	<jsp:include page="Headerbar.jsp" />
 
 	<br>
 	<br>
@@ -52,7 +117,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Science and technology</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="science_article">It is a
+									<div class="articletext" id="science_article">Dummy text: It is a
 										long established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -77,7 +142,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Lifestyle</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="lifestyle_article">It is a
+									<div class="articletext" id="lifestyle_article">Dummy text: It is a
 										long established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -130,7 +195,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Travel</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="travel_article">It is a long
+									<div class="articletext" id="travel_article">Dummy text: It is a long
 										established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -158,7 +223,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Business</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="business_article">It is a
+									<div class="articletext" id="business_article">Dummy text: It is a
 										long established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -183,7 +248,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Automobiles</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="automobiles_article">It is a
+									<div class="articletext" id="automobiles_article">Dummy text: It is a
 										long established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -211,7 +276,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">World news</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="world_article">It is a long
+									<div class="articletext" id="world_article">Dummy text: It is a long
 										established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less
@@ -235,7 +300,7 @@
 									style="width: 50px; height: 50px;" /><br> <span
 									class="card_title">Miscellaneous</span></td>
 								<td class="card_articles">
-									<div class="articletext" id="misc_article">It is a long
+									<div class="articletext" id="misc_article">Dummy text: It is a long
 										established fact that a reader will be distracted by the
 										readable content of a page when looking at its layout. The
 										point of using Lorem Ipsum is that it has a more-or-less

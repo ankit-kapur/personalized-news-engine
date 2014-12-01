@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -238,6 +239,10 @@ public class InsertUserCatPrefServlet extends HttpServlet {
 			{
 				System.err.println("User doesn't exist");
 			}
+			
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/ClustererServlet");
+			rd.include(request, response);
+
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

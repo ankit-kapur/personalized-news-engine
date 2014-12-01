@@ -6,10 +6,14 @@ var Manager;
     Manager = new AjaxSolr.Manager({
       //solrUrl: 'http://reuters-demo.tree.ewdev.ca:9090/reuters/'
       // If you are using a local Solr instance with a "reuters" core, use:
-       solrUrl: 'http://localhost:8983/solr/collection1/'
+       solrUrl: 'http://localhost:8983/solr/rss/'
       // If you are using a local Solr instance with a single core, use:
       // solrUrl: 'http://localhost:8983/solr/'
     });
+    var theUrl = "http://localhost:8983/solr/rss/dataimport?command=full-import&clean=false";
+    var xmlHttp = null;
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
       target: '#docs'
@@ -50,7 +54,7 @@ var Manager;
     }));
     Manager.addWidget(new AjaxSolr.CalendarWidget({
       id: 'calendar',
-      target: '#datepicker',
+      target: '#calendar',
       field: 'date'
     }));
     Manager.init();
@@ -66,29 +70,26 @@ var Manager;
       //'f.countryCodes.facet.limit': -1,%change
       //
       
-      'facet.date': 'date',
-      'facet.date.start': '1987-02-26T00:00:00.000Z/DAY',
-      'facet.date.end': '1987-10-20T00:00:00.000Z/DAY+1DAY',
-      'facet.date.gap': '+1DAY',
-      'json.nl': 'map'
+      //'facet.date': 'date',
+      //'facet.date.start': '1987-02-26T00:00:00.000Z/DAY',
+      //'facet.date.end': '1987-10-20T00:00:00.000Z/DAY+1DAY',
+      //'facet.date.gap': '+1DAY',
+      //'json.nl': 'map'
     };
     for (var name in params) {
       Manager.store.addByValue(name, params[name]);
     }
-   $.get("/SolrFlare/SemanticAnalysis", function(result) {
-    var pref = result.trim().split(" ");
-    var pref1 = pref[0];
-    var pref2 = pref[1];
-    var pref3 = pref[2];
+    var pref1 = "computer";
+    var pref2 = "travel";
+    var pref3 = "science";
     var params = {
        defType: 'edismax',
-    		bq:[pref1+"^10"+pref2+"^10"+pref3+"^80"]
+    		bq:[pref1+"^30"+pref2+"^40"+pref3+"^80"]
     };
     for (var name in params){
     	Manager.store.addByValue(name, params[name]);
     };
     Manager.doRequest();
-   });
   });
 
   $.fn.showIf = function (condition) {

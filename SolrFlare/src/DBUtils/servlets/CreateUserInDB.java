@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,8 +69,11 @@ public class CreateUserInDB extends HttpServlet {
 				logger.info("User registered with email=" + email);
 				out.println("success");
 
-//				RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-//				rd.include(request, response);
+				request.getSession().setAttribute("isLoggedIn", true);
+
+				request.setAttribute("username", username);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetUserPreferencesServlet");
+				rd.include(request, response);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

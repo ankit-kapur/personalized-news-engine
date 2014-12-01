@@ -627,7 +627,7 @@ public class DBUtils {
 
 	}
 
-	public Boolean InsertUserDocMapInDB(Map<String, UserDoc> userDocMap, String userId) throws DBUtilException, SQLException {
+	public Boolean insertUserDocMapInDB(Map<String, UserDoc> userDocMap, String userId) throws DBUtilException, SQLException {
 		boolean successFlag = false;
 		Connection con = getConnection();
 		PreparedStatement ps = null, ps1 = null, ps2 = null;
@@ -770,7 +770,7 @@ public class DBUtils {
 		return (!rs.isBeforeFirst() && rs.getRow() == 0);
 	}
 
-	public List<String> getDocIdsFromSimilarUsers(String userId, List<String> similarUsers) {
+	public List<String> getDocIdsFromSimilarUsers(String userId, List<String> similarUsers, String category) {
 		List<String> docIdList = new ArrayList<String>();
 
 		Connection con = getConnection();
@@ -790,7 +790,8 @@ public class DBUtils {
 				isFirst = false;
 			}
 
-			String query = "select articleId, weight from magnumdb.article where (" + similarUserString + ") and articleId not in (select articleId from magnumdb.article where idUser='" + userId.trim() + "') order by weight DESC;";
+			String query = "select articleId, weight from magnumdb.article where (" + similarUserString + ") "
+					+ "and idCategory in (select idCategory from category where nameCategory=" + category + " and (" + similarUserString + ")) and articleId not in (select articleId from magnumdb.article where idUser='" + userId.trim() + "') order by weight DESC;";
 			Statement st = con.createStatement();
 			rs = st.executeQuery(query);
 			while (rs != null && rs.next()) {

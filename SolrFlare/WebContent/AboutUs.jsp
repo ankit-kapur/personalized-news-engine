@@ -44,7 +44,7 @@
 	<div id="fb-root"></div>
 
 	<!-- UI Elements here -->
-	<jsp:include page="Headerbar.html" />
+	<jsp:include page="Headerbar.jsp" />
 
 	<br>
 	<br>

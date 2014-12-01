@@ -4,18 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Preference selection</title>
+<title>Article Viewer</title>
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="css/boxes.css" type="text/css" />
 <link rel="stylesheet" href="css/glowingtext.css" type="text/css" />
 
 <script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+    src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 <link rel="stylesheet"
-	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css">
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css">
 
 <script src="nytimes/js/searchresults.js"></script>
 <script src="nytimes/widgets/core/Core.js"></script>
@@ -38,21 +38,33 @@
 
 <script>
 	$(document).ready(function() {
-
-		var loggedIn =
-<%=session.getAttribute("isLoggedIn")%>
-	;
+		var loggedIn = <%=session.getAttribute("isLoggedIn")%>;	
 		if (loggedIn == null) {
 			window.location = "/SolrFlare/Loginpage.jsp";
+		} else {
+			$.get("/SolrFlare/loadNewsDescription", function(result) {
+	            $("#docDesc").html(result);
+	    	});
+			$.get("/SolrFlare/MoreLikeThis", function(result) {
+	           $("#more").html(result);
+	    	});
 		}
 	});
-	$(function() {
-		$("#datepicker").datepicker();
-
-		$(".ui-state-default").on("mouseenter", function() {
-			$(this).attr('title', 'This is the hover-over text'); // title attribute will be shown during the hover
-		});
-	});
+	function moreClick(){
+		var $this = $(this), div = $this.closest('div');
+		var data = "description="+div.html();
+		$.post("/SolrFlare/loadNewsDescription", data, function(result) {
+            if (result.trim() == "success") {
+            	window.location = "/SolrFlare/NewsDescription.jsp";
+            } 
+        });
+		$.get("/SolrFlare/loadNewsDescription", function(result) {
+            $("#docDesc").html(result);
+    	});
+		$.get("/SolrFlare/MoreLikeThis", function(result) {
+           $("#more").html(result);
+    	});
+	}
 </script>
 
 </head>
@@ -66,19 +78,17 @@
 	<br>
 	<section class="resultbox">
 		<div id="result">
-			<div id="navigation">
-				<ul id="pager"></ul>
-				<div id="pager-header"></div>
-			</div>
-			<div id="docs"></div>
+			<div id="docDesc"></div>
+			Was this helpful? &nbsp;<span class="like"><img alt="logout" src="images/like.png"></span>
+&nbsp;&nbsp;<span class="dislike"><img alt="logout" src="images/dislike.png"></span>
 		</div>
 	</section>
-	<section class="datebox">
-		<div id="datepicker" class="datepicker ll-skin-latoja"></div>
+	<section class="morelikebox">
+		<b><center>More like this</center></b>
+		<div id="more"></div>
 	</section>
-
 	<!--Footer bar-->
 	<jsp:include page="Footer.html" />
-
+	<input type="hidden" id="querytext" name="querytext">
 </body>
 </html>

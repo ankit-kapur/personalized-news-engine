@@ -28,6 +28,7 @@
 			if (response.status === 'connected') {
 				// Logged into your app and Facebook.
 // 				testAPI();
+// 				fb_login();
 			} else if (response.status === 'not_authorized') {
 				// The person is logged into Facebook, but not your app.
 				// document.getElementById("message").innerHTML = "Hello, please authorize our Facebook app to help us understand your interests better.";
@@ -45,8 +46,10 @@
 			FB.getLoginStatus(function(response) {
 				statusChangeCallback(response);
 				if (response.status == 'connected') {
-                    testAPI();
 	                document.getElementById("message").innerHTML = "Welcome. You are connected.";
+
+                    storeUserInterests();
+                    doesFbUserExist();
 				}
 			});
 		}
@@ -89,6 +92,7 @@
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 
+		var user_id, user_name, user_email;
 		function fb_login() {
 			FB
 					.login(
@@ -107,9 +111,8 @@
 										user_name = response.name;
 										user_email = response.email;
 										
-										storeUserInterests();
-										
-						                doesFbUserExist(user_id, user_name, user_email);
+// 										storeUserInterests();
+// 						                doesFbUserExist(user_id, user_name, user_email);
 									});
 
 									checkLoginState();
@@ -133,20 +136,27 @@
 
 		// Here we run a very simple test of the Graph API after login is
 		// successful.  See statusChangeCallback() for when this call is made.
-		function testAPI() {
-			console.log('Welcome. Fetching your information.. ');
-			FB.api('/me', function(response) {
-				console.log('Successful login for: ' + response.name
-						+ ", email: " + response.email);
-			});
-		}
+// 		function testAPI() {
+// 			console.log('Welcome. Fetching your information.. ');
+// 			FB.api('/me', function(response) {
+// 				console.log('Successful login for: ' + response.name
+// 						+ ", email: " + response.email);
+// 			});
+// 		}
 
         /* Does FB user already exist */
-        function doesFbUserExist(user_id, user_name, user_email) {
+        function doesFbUserExist() {
             var data = "username=" + user_id;
+
+            /* Get user preferences */
+            getUserPreferences(username);
             
             $.post("/SolrFlare/DoesUserExist", data, function(result) {
                 if (result == "yes") {
+
+                    /* Call clusterer */
+                    callClusterer();
+                    
                     window.location = "/SolrFlare/Home.jsp";
                 } else {
                     createFacebookUserInDb(user_id, user_name, user_email);
@@ -162,6 +172,10 @@
                   if (result.trim() == "success") {
                       document.getElementById("message").innerHTML = "Your account has been created.";
                       storeUserInterests();
+
+                      /* Call clusterer */
+                      callClusterer();
+                      
                       window.location = "/SolrFlare/SelectPreferences.jsp";
                   } else {
                       document.getElementById("message").innerHTML = "Your account could not be created: " + result;
@@ -224,7 +238,7 @@
 
 		function fb_login_action() {
 			fb_login();
-			checkLoginState();
+// 			checkLoginState();
 		}
 
 		var userInfo1 = "nodata";
@@ -253,13 +267,13 @@
 			var data = "about=" + userInfo1 + "&likes=" + userInfo2 + "&img=" + img;
 
 			$.post("/SolrFlare/FacebookDataToDB", data, function(result) {
-				alert(result);
+// 				alert(result);
 			});
 		}
 	</script>
 
 	<!-- UI Elements here -->
-	<jsp:include page="Headerbar.html" />
+	<jsp:include page="Headerbar.jsp" />
 
 	<br>
 	<br>

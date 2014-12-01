@@ -201,3 +201,18 @@
 	border: none;
 	background-color: #fff;
 }
+
+.logoutButton {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    padding-left: 1200px;
+    position: absolute;
+    right: 140px;
+    top:20px;
+}
+
+.logoutButton img {
+    width: 40px;
+    height: 40px; 
+}

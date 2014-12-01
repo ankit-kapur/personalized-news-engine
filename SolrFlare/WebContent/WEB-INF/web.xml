@@ -40,6 +40,9 @@
   </filter>
   <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/SolrFlare/Select*</url-pattern>
+    <url-pattern>/SolrFlare/Top*</url-pattern>
+    <url-pattern>/SolrFlare/About*</url-pattern>
+    <url-pattern>/Search*</url-pattern>
   </filter-mapping>
 </web-app>

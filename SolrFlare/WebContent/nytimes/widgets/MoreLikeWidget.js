@@ -54,7 +54,7 @@
 				// items = items.concat(this.facetLinks('exchanges',
 				// doc.exchanges));
 				items = items.concat(this.facetLinks('category',
-						doc.category));
+						doc.category))
 						var $links = $('#links_' + doc.id);
 				$links.empty();
 				for (var j = 0, m = items.length; j < m; j++) {
@@ -92,12 +92,21 @@
 					'a.more',
 					function() {
 						var $this = $(this), div = $this.closest('div');
-						var data = "description="+div.html();
-						$.post("/SolrFlare/loadNewsDescription", data, function(result) {
-			                if (result.trim() == "success") {
-			                	window.location = "/SolrFlare/NewsDescription.jsp";
-			                } 
-			            });
+						alert(div.html());
+						if( $(div.html()).children().length > 0 ) {
+							$(div.html()).children().each(function() {
+								alert("Hi");
+								if ( $(this).is("span") ) {
+									alert('Hello');
+									$(this).contents().unwrap();
+									alert(div.html());
+								}
+								//restoreTextFormat(this);
+							});
+						}
+						$("#docsDesc").html(div.html());
+						$("#docs").hide();
+						$("#docsDesc").show();
 						return false;
 					});
 		}

@@ -184,7 +184,6 @@
 			}); */
 		function submit() {
 
-			alert("hello");
 			document.getElementById("c_science_categIsSelected").value = science_categIsSelected;
 			document.getElementById("c_lifestyle_categIsSelected").value = lifestyle_categIsSelected;
 			document.getElementById("c_entertainment_categIsSelected").value = entertainment_categIsSelected;
@@ -208,7 +207,7 @@
 	<div id="fb-root"></div>
 
 	<!-- UI Elements here -->
-	<jsp:include page="Headerbar.html" />
+	<jsp:include page="Headerbar.jsp" />
 
 	<br>
 	<br>

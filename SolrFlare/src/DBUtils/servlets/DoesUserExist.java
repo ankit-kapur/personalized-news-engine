@@ -52,6 +52,9 @@ public class DoesUserExist extends HttpServlet {
 			DBUtils dbUtils = new DBUtils(connection);
 			boolean exists = dbUtils.isUserExists(username);
 			
+			if (exists)
+				request.getSession().setAttribute("isLoggedIn", true);
+			
 			PrintWriter printWriter = response.getWriter();
 			printWriter.write(exists ? "yes" : "no");
 			
