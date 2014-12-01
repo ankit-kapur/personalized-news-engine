@@ -7,39 +7,27 @@
 <title>Preference selection</title>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" href="css/boxes.css" type="text/css" />
+<link rel="stylesheet" href="css/homeboxes.css" type="text/css" />
 
-<script
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script
-    src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<link rel="stylesheet"
-    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css">
+<script src="js/jquery-1.11.1.js"></script>
 
-<script src="nytimes/js/searchresults.js"></script>
-<script src="nytimes/widgets/core/Core.js"></script>
-<script src="nytimes/widgets/core/AbstractManager.js"></script>
-<script src="nytimes/widgets/managers/Manager.jquery.js"></script>
-<script src="nytimes/widgets/core/Parameter.js"></script>
-<script src="nytimes/widgets/core/ParameterStore.js"></script>
-<script src="nytimes/widgets/core/AbstractWidget.js"></script>
-<script src="nytimes/widgets/ResultWidget.js"></script>
-<script src="nytimes/widgets/jquery/PagerWidget.js"></script>
-<script src="nytimes/widgets/core/AbstractFacetWidget.js"></script>
-<script src="nytimes/widgets/TagcloudWidget.js"></script>
-<script src="nytimes/widgets/CurrentSearchWidget.9.js"></script>
-<script src="nytimes/widgets/core/AbstractTextWidget.js"></script>
-<script src="nytimes/widgets/AutocompleteWidget.js"></script>
-<script src="nytimes/widgets/CountryCodeWidget.js"></script>
-<script src="nytimes/widgets/CalendarWidget.js"></script>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+            var data = "science";
+            $.post("/SolrFlare/GetHomeArticles", data, function(result) {
+                $("#science_article").html(result);
+            });
+            
+            var data = "lifestyle";
+            $.post("/SolrFlare/GetHomeArticles", data, function(result) {
+                $("#lifestyle_article").html(result);
+            });
+    });
+    </script>
 </head>
 
 <body>
 
-	<script type="text/javascript">
-		
-	</script>
 
 	<div id="fb-root"></div>
 
@@ -48,15 +36,222 @@
 
 	<br>
 	<br>
-	<section class="topstories">
+	<section class="homestories">
 		<div class="wrap">
-    		<h1>Recommended stories </h1>
-    		<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-    		<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-    		<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-    		<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+			<h1>Recommended stories</h1>
+			<table class="story_table" border="1">
+
+				<!-- 1st Row -->
+				<tr>
+					<!-- Science & technology -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/science.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Science and technology</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="science_article">It is a
+										long established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+
+					<!-- Lifestyle -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/lifestyle.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Lifestyle</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="lifestyle_article">It is a
+										long established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<!-- 2nd Row -->
+				<tr>
+					<!-- Entertainment -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/entertainment.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Entertainment</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="entertainment_article">It is
+										a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+
+					<!-- Travel -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/travel.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Travel</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="travel_article">It is a long
+										established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<!-- 3rd Row -->
+				<tr>
+					<!-- Business -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/business.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Business</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="business_article">It is a
+										long established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+
+					<!-- Automobiles -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img
+									src="images/icons/automobiles.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Automobiles</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="automobiles_article">It is a
+										long established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<!-- 4th Row -->
+				<tr>
+
+					<!-- World news -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img src="images/icons/world.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">World news</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="world_article">It is a long
+										established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+
+					<!-- Misc -->
+					<td class="card">
+						<table class="card_table">
+							<tr>
+								<td class="img_and_title"><img src="images/icons/misc.png"
+									style="width: 50px; height: 50px;" /><br> <span
+									class="card_title">Miscellaneous</span></td>
+								<td class="card_articles">
+									<div class="articletext" id="misc_article">It is a long
+										established fact that a reader will be distracted by the
+										readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English. It
+										is a long established fact that a reader will be distracted by
+										the readable content of a page when looking at its layout. The
+										point of using Lorem Ipsum is that it has a more-or-less
+										normal distribution of letters, as opposed to using 'Content
+										here, content here', making it look like readable English.</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</section>
 
@@ -67,7 +262,8 @@
 	<input type="hidden" name="userInfo2" id="userInfo2"
 		value="dummyvalue2" />
 
-    <br/><br/>
+	<br />
+	<br />
 
 	<!--Footer bar-->
 	<jsp:include page="Footer.html" />

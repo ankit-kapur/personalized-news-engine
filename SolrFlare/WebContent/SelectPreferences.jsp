@@ -5,16 +5,12 @@
 <html>
 <head>
 <title>Preference selection</title>
-
 <link
 	href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic&amp;subset=latin,latin-ext,cyrillic'
 	rel='stylesheet' type='text/css'>
-
 <link rel="stylesheet" href="css/selectpreferences.css" type="text/css" />
 <link rel="stylesheet" href="css/noty-buttons.css" type="text/css" />
-
 </head>
-
 <body>
 
 	<script src="js/jquery-1.7.2.min.js"></script>
@@ -97,7 +93,6 @@
 				$.noty.closeAll();
 			}, 2000);
 		}
-
 		function toggle(element, doToggle) {
 
 			var isCardActive = false;
@@ -183,7 +178,31 @@
 			});
 			return n;
 		}
-		
+		/* $("#submitHref").on('click', function() {
+			alert("Function called")
+			$("#prefernceName").submit();
+			}); */
+		function submit() {
+
+			alert("hello");
+			document.getElementById("c_science_categIsSelected").value = science_categIsSelected;
+			document.getElementById("c_lifestyle_categIsSelected").value = lifestyle_categIsSelected;
+			document.getElementById("c_entertainment_categIsSelected").value = entertainment_categIsSelected;
+			document.getElementById("c_travel_categIsSelected").value = travel_categIsSelected
+			document.getElementById("c_business_categIsSelected").value = business_categIsSelected
+			document.getElementById("c_automobiles_categIsSelected").value = automobiles_categIsSelected
+			document.getElementById("c_worldnews_categIsSelected").value = worldnews_categIsSelected
+			document.getElementById("c_misc_categIsSelected").value = misc_categIsSelected
+			document.getElementById("science_prefs").value = science_prefs
+			document.getElementById("lifestyle_prefs").value = lifestyle_prefs
+			document.getElementById("travel_prefs").value = travel_prefs
+			document.getElementById("business_prefs").value = business_prefs
+			document.getElementById("automobiles_prefs").value = automobiles_prefs
+			document.getElementById("worldnews_prefs").value = worldnews_prefs
+			document.getElementById("misc_prefs").value = misc_prefs
+			document.getElementById("entertainment_prefs").value = entertainment_prefs
+			document.getElementById("prefernceName").submit();
+		}
 	</script>
 
 	<div id="fb-root"></div>
@@ -198,7 +217,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_science">Science and Technology</div>
+					id="card_science">
+					<img src="images/icons/science.png"
+						style="width: 50px; height: 50px; margin-top: 0px" /><br> <span
+						class="card_title">Science and technology</span>
+				</div>
 				<div class="pref" id="pref_science">
 					<input type="text" class="preference_input" id="prefinput_science"
 						placeholder="Enter preference" onsubmit="alert('HI');" />
@@ -210,7 +233,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_lifestyle">Lifestyle</div>
+					id="card_lifestyle">
+					<img src="images/icons/lifestyle.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">Lifestyle</span>
+				</div>
 				<div class="pref" id="pref_lifestyle">
 					<input type="text" class="preference_input"
 						id="prefinput_lifestyle" placeholder="Enter preference" />
@@ -222,7 +249,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_entertainment">Entertainment</div>
+					id="card_entertainment">
+					<img src="images/icons/entertainment.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">Entertainment</span>
+				</div>
 				<div class="pref" id="pref_entertainment">
 					<input type="text" class="preference_input"
 						id="prefinput_entertainment" placeholder="Enter preference" />
@@ -234,7 +265,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_travel">Travel</div>
+					id="card_travel">
+					<img src="images/icons/travel.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">Travel</span>
+				</div>
 				<div class="pref" id="pref_travel">
 					<input type="text" class="preference_input" id="prefinput_travel"
 						placeholder="Enter preference" />
@@ -248,7 +283,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_business">Business</div>
+					id="card_business">
+					<img src="images/icons/business.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">Business</span>
+				</div>
 				<div class="pref" id="pref_business">
 					<input type="text" class="preference_input" id="prefinput_business"
 						placeholder="Enter preference" />
@@ -260,7 +299,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_automobiles">Automobiles</div>
+					id="card_automobiles">
+					<img src="images/icons/automobiles.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">Automobiles</span>
+				</div>
 				<div class="pref" id="pref_automobiles">
 					<input type="text" class="preference_input"
 						id="prefinput_automobiles" placeholder="Enter preference" />
@@ -272,7 +315,11 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_worldnews">World news</div>
+					id="card_worldnews">
+					<img src="images/icons/world.png"
+						style="width: 50px; height: 50px; margin-top: 8px" /><br> <span
+						class="card_title">World news</span>
+				</div>
 				<div class="pref" id="pref_worldnews">
 					<input type="text" class="preference_input"
 						id="prefinput_worldnews" placeholder="Enter preference" />
@@ -284,7 +331,10 @@
 			<td>
 				<div class="card" onclick="toggle(this, true);"
 					onmouseover="hoverCard(this);" onmouseleave="toggle(this, false);"
-					id="card_misc">Miscellaneous</div>
+					id="card_misc">
+					<img src="images/icons/misc.png" style="width: 50px; height: 50px; margin-top: 8px" /><br>
+					<span class="card_title">Miscellaneous</span>
+				</div>
 				<div class="pref" id="pref_misc">
 					<input type="text" class="preference_input" id="prefinput_misc"
 						placeholder="Enter preference" />
@@ -295,10 +345,34 @@
 		</tr>
 	</table>
 
-	<br>
 	<div id="submitlink">
-		<a href="Home.jsp">Submit preferences</a>
+		<a href="#" onclick="submit();">Submit preferences</a>
 	</div>
+	<form method="post" id="prefernceName"
+		action="InsertUserCatPrefServlet">
+		<input type="hidden" name="c_science_categIsSelected"
+			id="c_science_categIsSelected"> <input type="hidden"
+			name="science_prefs" id="science_prefs"> <input type="hidden"
+			name="c_lifestyle_categIsSelected" id="c_lifestyle_categIsSelected">
+		<input type="hidden" name="lifestyle_prefs" id="lifestyle_prefs">
+		<input type="hidden" name="c_entertainment_categIsSelected"
+			id="c_entertainment_categIsSelected"> <input type="hidden"
+			name="entertainment_prefs" id="entertainment_prefs"> <input
+			type="hidden" name="c_travel_categIsSelected"
+			id="c_travel_categIsSelected"> <input type="hidden"
+			name="travel_prefs" id="travel_prefs"> <input type="hidden"
+			name="c_business_categIsSelected" id="c_business_categIsSelected">
+		<input type="hidden" name="business_prefs" id="business_prefs">
+		<input type="hidden" name="c_automobiles_categIsSelected"
+			id="c_automobiles_categIsSelected"> <input type="hidden"
+			name="automobiles_prefs" id="automobiles_prefs"> <input
+			type="hidden" name="c_worldnews_categIsSelected"
+			id="c_worldnews_categIsSelected"> <input type="hidden"
+			name="worldnews_prefs" id="worldnews_prefs"> <input
+			type="hidden" name="c_misc_categIsSelected"
+			id="c_misc_categIsSelected"> <input type="hidden"
+			name="misc_prefs" id="misc_prefs">
+	</form>
 
 	<!--Footer bar-->
 	<jsp:include page="Footer.html" />

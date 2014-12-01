@@ -10,9 +10,6 @@
 <link rel="stylesheet" href="css/headerstyle.css" type="text/css" />
 <link rel="stylesheet" href="css/navbar.css" type="text/css" />
 <link rel="stylesheet" href="css/bodystyle.css" type="text/css" />
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
 
 <script src="js/jquery-1.11.1.js"></script>
 </head>
